@@ -1,5 +1,10 @@
 # Local implementation verification
 
+Publication update (18 November 2026): the project was initialized as a Git repository and
+pushed to the public `Prajuval69/ai-accelerator-validation-suite` repository. A copy of the
+previously measured `artifacts/demo_final` evidence is intentionally tracked under `docs/demo`
+for GitHub Pages. The original execution record below describes the October validation session.
+
 Executed on 13 October 2026 in `U:\projects\ai_accelerator_validation`, Windows 11 AMD64,
 Python 3.12.4. All benchmark workloads and inputs were locally generated and **synthetic**.
 Actual environment: Intel64 Family 6 Model 154 Stepping 3, 16 logical / 10 physical cores,

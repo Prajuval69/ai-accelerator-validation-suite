@@ -1,5 +1,11 @@
 # AI Accelerator Validation Suite
 
+[Live synthetic CPU report](https://prajuval69.github.io/ai-accelerator-validation-suite/) ·
+[Public source repository](https://github.com/Prajuval69/ai-accelerator-validation-suite)
+
+The live site is a static snapshot of an actual local synthetic CPU run, with downloadable
+evidence. Run the Python CLI locally to generate new validation results.
+
 A runnable CPU-first Python suite for synthetic ONNX inference performance and reliability
 validation. It generates tiny seeded PyTorch models locally, exports and checks their ONNX
 graphs, verifies numerical agreement, measures latency, exercises bounded concurrent stress,
