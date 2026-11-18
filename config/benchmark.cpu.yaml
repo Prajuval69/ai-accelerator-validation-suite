@@ -1,0 +1,26 @@
+schema_version: 1
+seed: 2026
+models: [mlp_gemm, conv2d, attention_matmul]
+input:
+  batch_sizes: [1, 4]
+  dtype: float32
+backend:
+  provider: CPUExecutionProvider
+  required: true
+  intra_op_num_threads: 2
+  inter_op_num_threads: 1
+measurement:
+  warmup_iterations: 5
+  timed_iterations: 30
+  concurrency: 1
+  max_input_megabytes: 128
+  enable_ort_profiling: false
+accuracy:
+  enabled: true
+  block_on_failure: true
+  atol: 0.0001
+  rtol: 0.001
+report:
+  html: true
+  csv: true
+  json: true

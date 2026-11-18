@@ -1,0 +1,10 @@
+schema_version: 1
+seed: 2026
+models: [mlp_gemm, conv2d, attention_matmul]
+backend:
+  provider: CPUExecutionProvider
+  required: true
+measurement:
+  warmup_iterations: 3
+  timed_iterations: 10
+  enable_ort_profiling: true

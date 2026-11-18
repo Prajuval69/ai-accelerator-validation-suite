@@ -1,0 +1,30 @@
+schema_version: 1
+seed: 2026
+models: [mlp_gemm, conv2d]
+input:
+  batch_sizes: [1]
+  dtype: float32
+backend:
+  provider: CPUExecutionProvider
+  required: true
+measurement:
+  warmup_iterations: 3
+  timed_iterations: 10
+  concurrency: 2
+  max_input_megabytes: 128
+  enable_ort_profiling: false
+stress:
+  duration_seconds: 10
+  max_duration_seconds: 120
+  max_concurrency: 4
+  memory_sample_interval_seconds: 0.25
+  timeout_seconds: 15
+accuracy:
+  enabled: true
+  block_on_failure: true
+  atol: 0.0001
+  rtol: 0.001
+report:
+  html: true
+  csv: true
+  json: true
