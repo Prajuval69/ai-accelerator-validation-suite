@@ -1,0 +1,4 @@
+case_id,model_id,status,precision,requested_provider,input_shape,p50_ms,p95_ms,p99_ms,mean_ms,stddev_ms,throughput_inferences_per_second,sample_count
+mlp_gemm_b1,mlp_gemm,PASS,float32,CPUExecutionProvider,"[1, 128]",0.011349999999999999,0.01710499999999999,0.020381,0.012259999999999998,0.003011378421919105,78369.90595611285,10
+conv2d_b1,conv2d,PASS,float32,CPUExecutionProvider,"[1, 3, 64, 64]",0.09085,0.10957999999999998,0.116636,0.09191000000000002,0.010603909656348455,10831.889081455805,10
+attention_matmul_b1,attention_matmul,PASS,float32,CPUExecutionProvider,"[1, 16, 32]",0.01415,0.05231499999999993,0.075103,0.021109999999999997,0.01992327533313737,41390.72847682119,10

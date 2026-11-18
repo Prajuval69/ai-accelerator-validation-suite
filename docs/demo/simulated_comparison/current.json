@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "run_id": "123646ef-f8d7-4494-8033-4c90d6046b7b",
+  "kind": "benchmark",
+  "started_at_utc": "2026-10-13T06:37:32.053558+00:00",
+  "synthetic_models": true,
+  "measurement_origin": "simulated_fixture",
+  "environment": {
+    "platform": "Windows",
+    "os_release": "11",
+    "architecture": "AMD64",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "logical_cores": 16,
+    "physical_cores": 10,
+    "total_ram_bytes": 16782176256,
+    "python": "3.12.4",
+    "torch": "2.14.1+cpu",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.31.0",
+    "numpy": "2.5.4",
+    "onnxscript": "0.7.2",
+    "psutil": "7.2.2",
+    "available_providers": [
+      "AzureExecutionProvider",
+      "CPUExecutionProvider"
+    ],
+    "git_commit": null,
+    "gpu_telemetry": null
+  },
+  "config": {
+    "schema_version": 1,
+    "seed": 2026,
+    "models": [
+      "mlp_gemm",
+      "conv2d",
+      "attention_matmul"
+    ],
+    "input": {
+      "batch_sizes": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "backend": {
+      "provider": "CPUExecutionProvider",
+      "required": true,
+      "intra_op_num_threads": 2,
+      "inter_op_num_threads": 1
+    },
+    "measurement": {
+      "warmup_iterations": 3,
+      "timed_iterations": 10,
+      "concurrency": 1,
+      "max_input_megabytes": 128,
+      "enable_ort_profiling": false
+    },
+    "stress": {
+      "duration_seconds": 10,
+      "max_duration_seconds": 120,
+      "max_concurrency": 4,
+      "memory_sample_interval_seconds": 0.25,
+      "timeout_seconds": 15,
+      "max_samples_per_worker": 10000
+    },
+    "accuracy": {
+      "enabled": true,
+      "block_on_failure": true,
+      "atol": 0.0001,
+      "rtol": 0.001
+    },
+    "regression": {
+      "fail_percent": 15,
+      "warning_percent": 5
+    },
+    "report": {
+      "html": true,
+      "csv": true,
+      "json": true
+    }
+  },
+  "cases": [
+    {
+      "case_id": "mlp_gemm_b1",
+      "model_id": "mlp_gemm",
+      "batch": 1,
+      "seed": 2026,
+      "precision": "float32",
+      "model_path": "fixtures/mlp_gemm_b1.onnx",
+      "model_sha256": "344ce618fc0bc8b8e840c6f1afb730d44fb3104229f9444521958d93896980a0",
+      "input_sha256": "cb4e8b7644d5267e1a8080953e678652cb5e97a0288b00ce0de4d57d5408af6c",
+      "input_shape": [
+        1,
+        128
+      ],
+      "export": {
+        "exporter": "dynamo",
+        "fallback_reason": null,
+        "graph_checked": true,
+        "dynamic_batch": false
+      },
+      "requested_provider": "CPUExecutionProvider",
+      "selected_providers": [
+        "CPUExecutionProvider"
+      ],
+      "status": "PASS",
+      "timing": {
+        "p95_ms": 1.25,
+        "simulated": true
+      },
+      "accuracy": {
+        "verdict": "PASS",
+        "atol": 0.0001,
+        "rtol": 0.001,
+        "reference": "PyTorch CPU float32",
+        "finite": true,
+        "max_absolute_error": 1.7881393432617188e-07,
+        "reason": null
+      },
+      "profile_evidence": {
+        "status": "placement unverified",
+        "provider_event_counts": {},
+        "cpu_fallback_observed": null,
+        "profile_path": null
+      },
+      "samples_ms": [],
+      "available_providers": [
+        "AzureExecutionProvider",
+        "CPUExecutionProvider"
+      ],
+      "profiling_enabled": false,
+      "session_settings": {
+        "provider": "CPUExecutionProvider",
+        "required": true,
+        "intra_op_num_threads": 2,
+        "inter_op_num_threads": 1,
+        "execution_mode": "sequential",
+        "graph_optimization": "all"
+      },
+      "resources": {
+        "rss_start_bytes": 392511488,
+        "rss_end_bytes": 393760768,
+        "rss_peak_sampled_bytes": null,
+        "note": "boundary snapshots only; no peak sampler in benchmark"
+      }
+    }
+  ],
+  "faults": [],
+  "summary": {},
+  "methodology": "SIMULATED comparator fixture; values are not measurements",
+  "artifacts": {
+    "json": "run.json",
+    "cases_csv": "cases.csv",
+    "latency_csv": "latency_samples.csv",
+    "html": "report.html",
+    "log": "logs/run.log"
+  },
+  "simulated_values": true
+}

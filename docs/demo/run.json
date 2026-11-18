@@ -1,0 +1,410 @@
+{
+  "schema_version": 1,
+  "run_id": "123646ef-f8d7-4494-8033-4c90d6046b7b",
+  "kind": "demo",
+  "started_at_utc": "2026-10-13T06:37:32.053558+00:00",
+  "synthetic_models": true,
+  "measurement_origin": "actual_local_execution",
+  "environment": {
+    "platform": "Windows",
+    "os_release": "11",
+    "architecture": "AMD64",
+    "cpu": "Intel64 Family 6 Model 154 Stepping 3, GenuineIntel",
+    "logical_cores": 16,
+    "physical_cores": 10,
+    "total_ram_bytes": 16782176256,
+    "python": "3.12.4",
+    "torch": "2.14.1+cpu",
+    "onnx": "1.23.2",
+    "onnxruntime": "1.31.0",
+    "numpy": "2.5.4",
+    "onnxscript": "0.7.2",
+    "psutil": "7.2.2",
+    "available_providers": [
+      "AzureExecutionProvider",
+      "CPUExecutionProvider"
+    ],
+    "git_commit": null,
+    "gpu_telemetry": null
+  },
+  "config": {
+    "schema_version": 1,
+    "seed": 2026,
+    "models": [
+      "mlp_gemm",
+      "conv2d",
+      "attention_matmul"
+    ],
+    "input": {
+      "batch_sizes": [
+        1
+      ],
+      "dtype": "float32"
+    },
+    "backend": {
+      "provider": "CPUExecutionProvider",
+      "required": true,
+      "intra_op_num_threads": 2,
+      "inter_op_num_threads": 1
+    },
+    "measurement": {
+      "warmup_iterations": 3,
+      "timed_iterations": 10,
+      "concurrency": 1,
+      "max_input_megabytes": 128,
+      "enable_ort_profiling": false
+    },
+    "stress": {
+      "duration_seconds": 10,
+      "max_duration_seconds": 120,
+      "max_concurrency": 4,
+      "memory_sample_interval_seconds": 0.25,
+      "timeout_seconds": 15,
+      "max_samples_per_worker": 10000
+    },
+    "accuracy": {
+      "enabled": true,
+      "block_on_failure": true,
+      "atol": 0.0001,
+      "rtol": 0.001
+    },
+    "regression": {
+      "fail_percent": 15,
+      "warning_percent": 5
+    },
+    "report": {
+      "html": true,
+      "csv": true,
+      "json": true
+    }
+  },
+  "cases": [
+    {
+      "case_id": "mlp_gemm_b1",
+      "model_id": "mlp_gemm",
+      "batch": 1,
+      "seed": 2026,
+      "precision": "float32",
+      "model_path": "fixtures/mlp_gemm_b1.onnx",
+      "model_sha256": "344ce618fc0bc8b8e840c6f1afb730d44fb3104229f9444521958d93896980a0",
+      "input_sha256": "cb4e8b7644d5267e1a8080953e678652cb5e97a0288b00ce0de4d57d5408af6c",
+      "input_shape": [
+        1,
+        128
+      ],
+      "export": {
+        "exporter": "dynamo",
+        "fallback_reason": null,
+        "graph_checked": true,
+        "dynamic_batch": false
+      },
+      "requested_provider": "CPUExecutionProvider",
+      "selected_providers": [
+        "CPUExecutionProvider"
+      ],
+      "status": "PASS",
+      "timing": {
+        "sample_count": 10,
+        "mean_ms": 0.012259999999999998,
+        "stddev_ms": 0.003011378421919105,
+        "p50_ms": 0.011349999999999999,
+        "p95_ms": 0.01710499999999999,
+        "p99_ms": 0.020381,
+        "timed_wall_seconds": 0.0001276,
+        "throughput_inferences_per_second": 78369.90595611285,
+        "warmup_iterations": 3,
+        "method": "sequential synchronous session.run; perf_counter_ns",
+        "concurrency": 1
+      },
+      "accuracy": {
+        "verdict": "PASS",
+        "atol": 0.0001,
+        "rtol": 0.001,
+        "reference": "PyTorch CPU float32",
+        "finite": true,
+        "max_absolute_error": 1.7881393432617188e-07,
+        "reason": null
+      },
+      "profile_evidence": {
+        "status": "placement unverified",
+        "provider_event_counts": {},
+        "cpu_fallback_observed": null,
+        "profile_path": null
+      },
+      "samples_ms": [
+        0.0116,
+        0.0121,
+        0.0116,
+        0.0111,
+        0.0212,
+        0.0116,
+        0.0109,
+        0.0108,
+        0.0111,
+        0.0106
+      ],
+      "available_providers": [
+        "AzureExecutionProvider",
+        "CPUExecutionProvider"
+      ],
+      "profiling_enabled": false,
+      "session_settings": {
+        "provider": "CPUExecutionProvider",
+        "required": true,
+        "intra_op_num_threads": 2,
+        "inter_op_num_threads": 1,
+        "execution_mode": "sequential",
+        "graph_optimization": "all"
+      },
+      "resources": {
+        "rss_start_bytes": 392511488,
+        "rss_end_bytes": 393760768,
+        "rss_peak_sampled_bytes": null,
+        "note": "boundary snapshots only; no peak sampler in benchmark"
+      }
+    },
+    {
+      "case_id": "conv2d_b1",
+      "model_id": "conv2d",
+      "batch": 1,
+      "seed": 2026,
+      "precision": "float32",
+      "model_path": "fixtures/conv2d_b1.onnx",
+      "model_sha256": "d65c6872b81bb73bb8c235903e050448ed9b609b0f0e1119b5fd82936e148fa2",
+      "input_sha256": "8ceafb85cdb022445173867f0ff2e32974f3f773c34f1d7057db792a2630fd6d",
+      "input_shape": [
+        1,
+        3,
+        64,
+        64
+      ],
+      "export": {
+        "exporter": "dynamo",
+        "fallback_reason": null,
+        "graph_checked": true,
+        "dynamic_batch": false
+      },
+      "requested_provider": "CPUExecutionProvider",
+      "selected_providers": [
+        "CPUExecutionProvider"
+      ],
+      "status": "PASS",
+      "timing": {
+        "sample_count": 10,
+        "mean_ms": 0.09191000000000002,
+        "stddev_ms": 0.010603909656348455,
+        "p50_ms": 0.09085,
+        "p95_ms": 0.10957999999999998,
+        "p99_ms": 0.116636,
+        "timed_wall_seconds": 0.0009232,
+        "throughput_inferences_per_second": 10831.889081455805,
+        "warmup_iterations": 3,
+        "method": "sequential synchronous session.run; perf_counter_ns",
+        "concurrency": 1
+      },
+      "accuracy": {
+        "verdict": "PASS",
+        "atol": 0.0001,
+        "rtol": 0.001,
+        "reference": "PyTorch CPU float32",
+        "finite": true,
+        "max_absolute_error": 4.470348358154297e-08,
+        "reason": null
+      },
+      "profile_evidence": {
+        "status": "placement unverified",
+        "provider_event_counts": {},
+        "cpu_fallback_observed": null,
+        "profile_path": null
+      },
+      "samples_ms": [
+        0.1184,
+        0.0988,
+        0.0896,
+        0.094,
+        0.0785,
+        0.0946,
+        0.0921,
+        0.0854,
+        0.0821,
+        0.0856
+      ],
+      "available_providers": [
+        "AzureExecutionProvider",
+        "CPUExecutionProvider"
+      ],
+      "profiling_enabled": false,
+      "session_settings": {
+        "provider": "CPUExecutionProvider",
+        "required": true,
+        "intra_op_num_threads": 2,
+        "inter_op_num_threads": 1,
+        "execution_mode": "sequential",
+        "graph_optimization": "all"
+      },
+      "resources": {
+        "rss_start_bytes": 397185024,
+        "rss_end_bytes": 397185024,
+        "rss_peak_sampled_bytes": null,
+        "note": "boundary snapshots only; no peak sampler in benchmark"
+      }
+    },
+    {
+      "case_id": "attention_matmul_b1",
+      "model_id": "attention_matmul",
+      "batch": 1,
+      "seed": 2026,
+      "precision": "float32",
+      "model_path": "fixtures/attention_matmul_b1.onnx",
+      "model_sha256": "a9ee63c71d38d5c7909ac8eb5c5cc25bbd94703b7122a9a48fbed59d646a9fc0",
+      "input_sha256": "ef8193c178c53a9977e2423fc9d47fec8fea0ab353b1f71a18b78920d21ca392",
+      "input_shape": [
+        1,
+        16,
+        32
+      ],
+      "export": {
+        "exporter": "dynamo",
+        "fallback_reason": null,
+        "graph_checked": true,
+        "dynamic_batch": false
+      },
+      "requested_provider": "CPUExecutionProvider",
+      "selected_providers": [
+        "CPUExecutionProvider"
+      ],
+      "status": "PASS",
+      "timing": {
+        "sample_count": 10,
+        "mean_ms": 0.021109999999999997,
+        "stddev_ms": 0.01992327533313737,
+        "p50_ms": 0.01415,
+        "p95_ms": 0.05231499999999993,
+        "p99_ms": 0.075103,
+        "timed_wall_seconds": 0.0002416,
+        "throughput_inferences_per_second": 41390.72847682119,
+        "warmup_iterations": 3,
+        "method": "sequential synchronous session.run; perf_counter_ns",
+        "concurrency": 1
+      },
+      "accuracy": {
+        "verdict": "PASS",
+        "atol": 0.0001,
+        "rtol": 0.001,
+        "reference": "PyTorch CPU float32",
+        "finite": true,
+        "max_absolute_error": 8.940696716308594e-08,
+        "reason": null
+      },
+      "profile_evidence": {
+        "status": "placement unverified",
+        "provider_event_counts": {},
+        "cpu_fallback_observed": null,
+        "profile_path": null
+      },
+      "samples_ms": [
+        0.0143,
+        0.0137,
+        0.014,
+        0.0808,
+        0.0175,
+        0.0144,
+        0.0141,
+        0.014,
+        0.0142,
+        0.0141
+      ],
+      "available_providers": [
+        "AzureExecutionProvider",
+        "CPUExecutionProvider"
+      ],
+      "profiling_enabled": false,
+      "session_settings": {
+        "provider": "CPUExecutionProvider",
+        "required": true,
+        "intra_op_num_threads": 2,
+        "inter_op_num_threads": 1,
+        "execution_mode": "sequential",
+        "graph_optimization": "all"
+      },
+      "resources": {
+        "rss_start_bytes": 397238272,
+        "rss_end_bytes": 397242368,
+        "rss_peak_sampled_bytes": null,
+        "note": "boundary snapshots only; no peak sampler in benchmark"
+      }
+    }
+  ],
+  "faults": [
+    {
+      "fault_id": "bad_dtype",
+      "expected": "EXPECTED_REJECTION",
+      "observed_error_category": "EXPECTED_REJECTION",
+      "observed_error": "InvalidArgument: [ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Unexpected input data type. Actual: (tensor(double)) , expected: (tensor(float))",
+      "outcome": "PASS",
+      "cleanup_complete": true
+    },
+    {
+      "fault_id": "bad_shape",
+      "expected": "EXPECTED_REJECTION",
+      "observed_error_category": "EXPECTED_REJECTION",
+      "observed_error": "InvalidArgument: [ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Invalid rank for input: input Got: 1 Expected: 2 Please fix either the inputs<path> or the model.",
+      "outcome": "PASS",
+      "cleanup_complete": true
+    },
+    {
+      "fault_id": "missing_file",
+      "expected": "EXPECTED_REJECTION",
+      "observed_error_category": "EXPECTED_REJECTION",
+      "observed_error": "NoSuchFile: [ONNXRuntimeError] : 3 : NO_SUCHFILE : Load model from <path> failed:Load model <path> failed. File doesn't exist",
+      "outcome": "PASS",
+      "cleanup_complete": true
+    },
+    {
+      "fault_id": "corrupt_file",
+      "expected": "EXPECTED_REJECTION",
+      "observed_error_category": "EXPECTED_REJECTION",
+      "observed_error": "InvalidProtobuf: [ONNXRuntimeError] : 7 : INVALID_PROTOBUF : Load model from <path> failed:Protobuf parsing failed.",
+      "outcome": "PASS",
+      "cleanup_complete": true
+    },
+    {
+      "fault_id": "unavailable_provider",
+      "expected": "UNAVAILABLE",
+      "observed_error_category": "UNAVAILABLE",
+      "observed_error": "ProviderUnavailable: AIVS_Sentinel_UnavailableProvider UNAVAILABLE; installed providers: ['AzureExecutionProvider', 'CPUExecutionProvider']",
+      "outcome": "PASS",
+      "cleanup_complete": true
+    },
+    {
+      "fault_id": "timeout",
+      "expected": "EXPECTED_TIMEOUT",
+      "observed_error_category": "EXPECTED_TIMEOUT",
+      "outcome": "PASS",
+      "observed_error": "child deadline exceeded",
+      "cleanup_complete": true
+    }
+  ],
+  "summary": {
+    "case_status_counts": {
+      "PASS": 3,
+      "FAIL": 0,
+      "ERROR": 0,
+      "SKIP": 0,
+      "UNAVAILABLE": 0
+    },
+    "verdict": "PASS",
+    "executed_cases": 3,
+    "correctness_passes": 3,
+    "expected_fault_passes": 6
+  },
+  "methodology": "Synthetic seeded models/inputs; synchronous session.run; perf_counter_ns; warmup excluded. Shared systems are noisy. No production task accuracy or physical board validation.",
+  "artifacts": {
+    "json": "run.json",
+    "cases_csv": "cases.csv",
+    "latency_csv": "latency_samples.csv",
+    "html": "report.html",
+    "log": "logs/run.log",
+    "simulated_comparison": "simulated_comparison/report.html"
+  }
+}

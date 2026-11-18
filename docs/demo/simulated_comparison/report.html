@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AIVS comparison validation report</title>
+<style>
+:root{color-scheme:light;--ink:#182a38;--accent:#066969}
+*{box-sizing:border-box}body{margin:0;background:#f4f6f6;color:var(--ink);
+font:15px/1.6 system-ui,sans-serif}main{max-width:1500px;margin:auto;padding:36px}
+header{border-top:5px solid var(--accent);padding:24px 0}h1{font-size:32px;margin:0}
+h2{font-size:22px;margin-top:40px}.eyebrow{text-transform:uppercase;letter-spacing:.14em}
+.status{font-weight:700;border:1px solid;padding:4px 12px;display:inline-block}
+.ribbon{display:flex;flex-wrap:wrap;border-top:1px solid #b8c7cb;border-bottom:1px solid #b8c7cb}
+.metric{padding:20px 28px 20px 0;flex:1;min-width:180px}
+.metric strong{display:block;font-size:28px}
+.scroll{overflow:auto}table{border-collapse:collapse;width:100%;background:white}
+caption{text-align:left;padding:12px 0;color:#415664}th,td{padding:12px;text-align:left;
+border-bottom:1px solid #d5dfe1;vertical-align:top}th{background:#e7eeee;white-space:nowrap}
+td{font-variant-numeric:tabular-nums}pre{white-space:pre-wrap;overflow-wrap:anywhere;
+font-size:12px;background:#e8eeee;padding:18px}details{margin:14px 0}summary{cursor:pointer}
+a{color:#005f63}.charts{display:flex;flex-wrap:wrap;gap:20px}figure{margin:0;max-width:440px;
+width:100%;background:white;padding:16px}svg{width:100%;fill:var(--accent)}
+svg text{fill:var(--ink);
+font-size:11px}.notice{border-left:4px solid #a26400;padding:14px;background:#fff0d2}
+@media(max-width:650px){main{padding:18px}h1{font-size:26px}}
+</style></head><body><main>
+<header><div class="eyebrow">AIVS / Runtime validation</div>
+<h1>Comparison report</h1>
+<p>Synthetic models / locally generated inputs</p>
+<p>Run a456b757-eba2-45a4-9dc3-614a3612cb3e · 2026-10-13T06:37:35.654223+00:00</p>
+<span class="status">FAIL</span><p class="notice">SIMULATED COMPARISON FIXTURE VALUES — not measured performance.</p>
+</header><div class="ribbon">
+<div class="metric"><strong>1</strong>Compared cases</div><div class="metric"><strong>1</strong>Regressions</div><div class="metric"><strong>0</strong>Incomparable</div><div class="metric"><strong>0</strong>Warnings</div>
+</div><p><a href="run.json">json</a> · <a href="cases.csv">cases_csv</a> · <a href="latency_samples.csv">latency_csv</a> · <a href="report.html">html</a> · <a href="logs/run.log">log</a></p><p></p>
+<h2>Configuration and environment</h2>
+<details><summary>Actual runtime / hardware provenance</summary>
+<pre>{
+  &quot;platform&quot;: &quot;Windows&quot;,
+  &quot;os_release&quot;: &quot;11&quot;,
+  &quot;architecture&quot;: &quot;AMD64&quot;,
+  &quot;cpu&quot;: &quot;Intel64 Family 6 Model 154 Stepping 3, GenuineIntel&quot;,
+  &quot;logical_cores&quot;: 16,
+  &quot;physical_cores&quot;: 10,
+  &quot;total_ram_bytes&quot;: 16782176256,
+  &quot;python&quot;: &quot;3.12.4&quot;,
+  &quot;torch&quot;: &quot;2.14.1+cpu&quot;,
+  &quot;onnx&quot;: &quot;1.23.2&quot;,
+  &quot;onnxruntime&quot;: &quot;1.31.0&quot;,
+  &quot;numpy&quot;: &quot;2.5.4&quot;,
+  &quot;onnxscript&quot;: &quot;0.7.2&quot;,
+  &quot;psutil&quot;: &quot;7.2.2&quot;,
+  &quot;available_providers&quot;: [
+    &quot;AzureExecutionProvider&quot;,
+    &quot;CPUExecutionProvider&quot;
+  ],
+  &quot;git_commit&quot;: null,
+  &quot;gpu_telemetry&quot;: null
+}</pre></details>
+<details><summary>Reproducible configuration, timing and tolerances</summary>
+<pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;seed&quot;: 2026,
+  &quot;models&quot;: [
+    &quot;mlp_gemm&quot;,
+    &quot;conv2d&quot;,
+    &quot;attention_matmul&quot;
+  ],
+  &quot;input&quot;: {
+    &quot;batch_sizes&quot;: [
+      1
+    ],
+    &quot;dtype&quot;: &quot;float32&quot;
+  },
+  &quot;backend&quot;: {
+    &quot;provider&quot;: &quot;CPUExecutionProvider&quot;,
+    &quot;required&quot;: true,
+    &quot;intra_op_num_threads&quot;: 2,
+    &quot;inter_op_num_threads&quot;: 1
+  },
+  &quot;measurement&quot;: {
+    &quot;warmup_iterations&quot;: 3,
+    &quot;timed_iterations&quot;: 10,
+    &quot;concurrency&quot;: 1,
+    &quot;max_input_megabytes&quot;: 128,
+    &quot;enable_ort_profiling&quot;: false
+  },
+  &quot;stress&quot;: {
+    &quot;duration_seconds&quot;: 10,
+    &quot;max_duration_seconds&quot;: 120,
+    &quot;max_concurrency&quot;: 4,
+    &quot;memory_sample_interval_seconds&quot;: 0.25,
+    &quot;timeout_seconds&quot;: 15,
+    &quot;max_samples_per_worker&quot;: 10000
+  },
+  &quot;accuracy&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;block_on_failure&quot;: true,
+    &quot;atol&quot;: 0.0001,
+    &quot;rtol&quot;: 0.001
+  },
+  &quot;regression&quot;: {
+    &quot;fail_percent&quot;: 15,
+    &quot;warning_percent&quot;: 5
+  },
+  &quot;report&quot;: {
+    &quot;html&quot;: true,
+    &quot;csv&quot;: true,
+    &quot;json&quot;: true
+  }
+}</pre></details>
+<h2>Baseline comparison</h2><div class="scroll"><table><caption>Compatibility precedes regression; threshold equality increases severity</caption><thead><tr><th scope="col">Case</th><th scope="col">Verdict</th><th scope="col">Baseline p95 ms</th><th scope="col">Current p95 ms</th><th scope="col">Change %</th><th scope="col">Warn %</th><th scope="col">Fail %</th><th scope="col">Confidence</th><th scope="col">Caveat</th><th scope="col">Changed fields</th></tr></thead><tbody><tr><td>mlp_gemm_b1</td><td>REGRESSION</td><td>1</td><td>1.25</td><td>25</td><td>5</td><td>15</td><td>strict</td><td>—</td><td><pre>[]</pre></td></tr></tbody></table></div><pre>{
+  &quot;baseline_sha256&quot;: &quot;4ba97ba41e37d90c941db749822b1e2e5cc2e7177987d3d414b4d4d91639f837&quot;,
+  &quot;current_sha256&quot;: &quot;4c14093fe28592ab746dc212f504529ba9a5f5b09cf4b7d26d0576211d5b3f55&quot;,
+  &quot;baseline_run_id&quot;: &quot;123646ef-f8d7-4494-8033-4c90d6046b7b&quot;,
+  &quot;current_run_id&quot;: &quot;123646ef-f8d7-4494-8033-4c90d6046b7b&quot;
+}</pre>
+<h2>Methodology and limits</h2><p>Synthetic seeded models/inputs; synchronous session.run; perf_counter_ns; warmup excluded. Shared systems are noisy. No production task accuracy or physical board validation.</p>
+<p>Each inference uses the same prepared input. CPU frequency, thermal effects, graph caching and
+other activity can affect timings. Stress retains bounded first samples per worker; their
+percentiles may not represent the entire run. Sequential benchmarks include Python call overhead;
+stress throughput is concurrent. GPU selection alone does not prove accelerator node execution.
+Boundary RSS snapshots do not establish peak memory. Synthetic numerical agreement establishes
+runtime fidelity, not task accuracy. No physical development board testing was performed.</p>
+</main></body></html>

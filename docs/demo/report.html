@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AIVS demo validation report</title>
+<style>
+:root{color-scheme:light;--ink:#182a38;--accent:#066969}
+*{box-sizing:border-box}body{margin:0;background:#f4f6f6;color:var(--ink);
+font:15px/1.6 system-ui,sans-serif}main{max-width:1500px;margin:auto;padding:36px}
+header{border-top:5px solid var(--accent);padding:24px 0}h1{font-size:32px;margin:0}
+h2{font-size:22px;margin-top:40px}.eyebrow{text-transform:uppercase;letter-spacing:.14em}
+.status{font-weight:700;border:1px solid;padding:4px 12px;display:inline-block}
+.ribbon{display:flex;flex-wrap:wrap;border-top:1px solid #b8c7cb;border-bottom:1px solid #b8c7cb}
+.metric{padding:20px 28px 20px 0;flex:1;min-width:180px}
+.metric strong{display:block;font-size:28px}
+.scroll{overflow:auto}table{border-collapse:collapse;width:100%;background:white}
+caption{text-align:left;padding:12px 0;color:#415664}th,td{padding:12px;text-align:left;
+border-bottom:1px solid #d5dfe1;vertical-align:top}th{background:#e7eeee;white-space:nowrap}
+td{font-variant-numeric:tabular-nums}pre{white-space:pre-wrap;overflow-wrap:anywhere;
+font-size:12px;background:#e8eeee;padding:18px}details{margin:14px 0}summary{cursor:pointer}
+a{color:#005f63}.charts{display:flex;flex-wrap:wrap;gap:20px}figure{margin:0;max-width:440px;
+width:100%;background:white;padding:16px}svg{width:100%;fill:var(--accent)}
+svg text{fill:var(--ink);
+font-size:11px}.notice{border-left:4px solid #a26400;padding:14px;background:#fff0d2}
+@media(max-width:650px){main{padding:18px}h1{font-size:26px}}
+</style></head><body><main>
+<header><div class="eyebrow">AIVS / Runtime validation</div>
+<h1>Demo report</h1>
+<p>Synthetic models / locally generated inputs</p>
+<p>Run 123646ef-f8d7-4494-8033-4c90d6046b7b · 2026-10-13T06:37:32.053558+00:00</p>
+<span class="status">PASS</span>
+</header><div class="ribbon">
+<div class="metric"><strong>3</strong>Workload types</div><div class="metric"><strong>3</strong>Executed cases</div><div class="metric"><strong>3</strong>Correctness passes</div><div class="metric"><strong>6</strong>Expected fault passes</div>
+</div><p><a href="run.json">json</a> · <a href="cases.csv">cases_csv</a> · <a href="latency_samples.csv">latency_csv</a> · <a href="report.html">html</a> · <a href="logs/run.log">log</a> · <a href="simulated_comparison/report.html">simulated_comparison</a></p><p><a href="fixtures/mlp_gemm_b1.onnx">mlp_gemm_b1 ONNX</a> · <a href="fixtures/conv2d_b1.onnx">conv2d_b1 ONNX</a> · <a href="fixtures/attention_matmul_b1.onnx">attention_matmul_b1 ONNX</a></p>
+<h2>Configuration and environment</h2>
+<details><summary>Actual runtime / hardware provenance</summary>
+<pre>{
+  &quot;platform&quot;: &quot;Windows&quot;,
+  &quot;os_release&quot;: &quot;11&quot;,
+  &quot;architecture&quot;: &quot;AMD64&quot;,
+  &quot;cpu&quot;: &quot;Intel64 Family 6 Model 154 Stepping 3, GenuineIntel&quot;,
+  &quot;logical_cores&quot;: 16,
+  &quot;physical_cores&quot;: 10,
+  &quot;total_ram_bytes&quot;: 16782176256,
+  &quot;python&quot;: &quot;3.12.4&quot;,
+  &quot;torch&quot;: &quot;2.14.1+cpu&quot;,
+  &quot;onnx&quot;: &quot;1.23.2&quot;,
+  &quot;onnxruntime&quot;: &quot;1.31.0&quot;,
+  &quot;numpy&quot;: &quot;2.5.4&quot;,
+  &quot;onnxscript&quot;: &quot;0.7.2&quot;,
+  &quot;psutil&quot;: &quot;7.2.2&quot;,
+  &quot;available_providers&quot;: [
+    &quot;AzureExecutionProvider&quot;,
+    &quot;CPUExecutionProvider&quot;
+  ],
+  &quot;git_commit&quot;: null,
+  &quot;gpu_telemetry&quot;: null
+}</pre></details>
+<details><summary>Reproducible configuration, timing and tolerances</summary>
+<pre>{
+  &quot;schema_version&quot;: 1,
+  &quot;seed&quot;: 2026,
+  &quot;models&quot;: [
+    &quot;mlp_gemm&quot;,
+    &quot;conv2d&quot;,
+    &quot;attention_matmul&quot;
+  ],
+  &quot;input&quot;: {
+    &quot;batch_sizes&quot;: [
+      1
+    ],
+    &quot;dtype&quot;: &quot;float32&quot;
+  },
+  &quot;backend&quot;: {
+    &quot;provider&quot;: &quot;CPUExecutionProvider&quot;,
+    &quot;required&quot;: true,
+    &quot;intra_op_num_threads&quot;: 2,
+    &quot;inter_op_num_threads&quot;: 1
+  },
+  &quot;measurement&quot;: {
+    &quot;warmup_iterations&quot;: 3,
+    &quot;timed_iterations&quot;: 10,
+    &quot;concurrency&quot;: 1,
+    &quot;max_input_megabytes&quot;: 128,
+    &quot;enable_ort_profiling&quot;: false
+  },
+  &quot;stress&quot;: {
+    &quot;duration_seconds&quot;: 10,
+    &quot;max_duration_seconds&quot;: 120,
+    &quot;max_concurrency&quot;: 4,
+    &quot;memory_sample_interval_seconds&quot;: 0.25,
+    &quot;timeout_seconds&quot;: 15,
+    &quot;max_samples_per_worker&quot;: 10000
+  },
+  &quot;accuracy&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;block_on_failure&quot;: true,
+    &quot;atol&quot;: 0.0001,
+    &quot;rtol&quot;: 0.001
+  },
+  &quot;regression&quot;: {
+    &quot;fail_percent&quot;: 15,
+    &quot;warning_percent&quot;: 5
+  },
+  &quot;report&quot;: {
+    &quot;html&quot;: true,
+    &quot;csv&quot;: true,
+    &quot;json&quot;: true
+  }
+}</pre></details>
+<h2>Performance</h2><div class="scroll"><table><caption>Performance by case; latency and throughput are never averaged across models</caption><thead><tr><th scope="col">Case / model</th><th scope="col">Shape</th><th scope="col">Precision</th><th scope="col">Status</th><th scope="col">Correctness</th><th scope="col">p50 ms</th><th scope="col">p95 ms</th><th scope="col">p99 ms</th><th scope="col">Mean ms</th><th scope="col">Stddev ms</th><th scope="col">Inferences/s</th><th scope="col">End RSS bytes</th><th scope="col">Sampled peak RSS bytes</th></tr></thead><tbody><tr><td>mlp_gemm_b1</td><td>[1, 128]</td><td>float32</td><td>PASS</td><td>PASS</td><td>0.01135</td><td>0.017105</td><td>0.020381</td><td>0.01226</td><td>0.0030114</td><td>78370</td><td>393760768</td><td>—</td></tr><tr><td>conv2d_b1</td><td>[1, 3, 64, 64]</td><td>float32</td><td>PASS</td><td>PASS</td><td>0.09085</td><td>0.10958</td><td>0.11664</td><td>0.09191</td><td>0.010604</td><td>10832</td><td>397185024</td><td>—</td></tr><tr><td>attention_matmul_b1</td><td>[1, 16, 32]</td><td>float32</td><td>PASS</td><td>PASS</td><td>0.01415</td><td>0.052315</td><td>0.075103</td><td>0.02111</td><td>0.019923</td><td>41391</td><td>397242368</td><td>—</td></tr></tbody></table></div><h2>Execution provider evidence</h2><div class="scroll"><table><caption>Presence, selection and placement</caption><thead><tr><th scope="col">Case</th><th scope="col">Requested</th><th scope="col">Loaded</th><th scope="col">Placement</th><th scope="col">Node event counts</th><th scope="col">CPU fallback</th><th scope="col">Evidence</th></tr></thead><tbody><tr><td>mlp_gemm_b1</td><td>CPUExecutionProvider</td><td>CPUExecutionProvider</td><td>placement unverified</td><td>{}</td><td>—</td><td></td></tr><tr><td>conv2d_b1</td><td>CPUExecutionProvider</td><td>CPUExecutionProvider</td><td>placement unverified</td><td>{}</td><td>—</td><td></td></tr><tr><td>attention_matmul_b1</td><td>CPUExecutionProvider</td><td>CPUExecutionProvider</td><td>placement unverified</td><td>{}</td><td>—</td><td></td></tr></tbody></table></div><h2>Latency distributions</h2><div class="charts"><figure><figcaption>mlp_gemm_b1 latency distribution (ms), 10 samples</figcaption><svg viewBox="0 0 410 145" role="img" aria-label="mlp_gemm_b1 latency distribution (ms), 10 samples"><title>mlp_gemm_b1 latency distribution (ms), 10 samples</title><rect x="10" y="20.00" width="20" height="90.00"/><rect x="34" y="56.00" width="20" height="54.00"/><rect x="58" y="92.00" width="20" height="18.00"/><rect x="82" y="110.00" width="20" height="0.00"/><rect x="106" y="110.00" width="20" height="0.00"/><rect x="130" y="110.00" width="20" height="0.00"/><rect x="154" y="110.00" width="20" height="0.00"/><rect x="178" y="110.00" width="20" height="0.00"/><rect x="202" y="110.00" width="20" height="0.00"/><rect x="226" y="110.00" width="20" height="0.00"/><rect x="250" y="110.00" width="20" height="0.00"/><rect x="274" y="110.00" width="20" height="0.00"/><rect x="298" y="110.00" width="20" height="0.00"/><rect x="322" y="110.00" width="20" height="0.00"/><rect x="346" y="110.00" width="20" height="0.00"/><rect x="370" y="92.00" width="20" height="18.00"/><text x="10" y="137">0.0106 ms</text><text x="300" y="137">0.0212 ms</text></svg></figure><figure><figcaption>conv2d_b1 latency distribution (ms), 10 samples</figcaption><svg viewBox="0 0 410 145" role="img" aria-label="conv2d_b1 latency distribution (ms), 10 samples"><title>conv2d_b1 latency distribution (ms), 10 samples</title><rect x="10" y="65.00" width="20" height="45.00"/><rect x="34" y="65.00" width="20" height="45.00"/><rect x="58" y="20.00" width="20" height="90.00"/><rect x="82" y="110.00" width="20" height="0.00"/><rect x="106" y="65.00" width="20" height="45.00"/><rect x="130" y="65.00" width="20" height="45.00"/><rect x="154" y="20.00" width="20" height="90.00"/><rect x="178" y="110.00" width="20" height="0.00"/><rect x="202" y="65.00" width="20" height="45.00"/><rect x="226" y="110.00" width="20" height="0.00"/><rect x="250" y="110.00" width="20" height="0.00"/><rect x="274" y="110.00" width="20" height="0.00"/><rect x="298" y="110.00" width="20" height="0.00"/><rect x="322" y="110.00" width="20" height="0.00"/><rect x="346" y="110.00" width="20" height="0.00"/><rect x="370" y="65.00" width="20" height="45.00"/><text x="10" y="137">0.0785 ms</text><text x="300" y="137">0.1184 ms</text></svg></figure><figure><figcaption>attention_matmul_b1 latency distribution (ms), 10 samples</figcaption><svg viewBox="0 0 410 145" role="img" aria-label="attention_matmul_b1 latency distribution (ms), 10 samples"><title>attention_matmul_b1 latency distribution (ms), 10 samples</title><rect x="10" y="20.00" width="20" height="90.00"/><rect x="34" y="110.00" width="20" height="0.00"/><rect x="58" y="110.00" width="20" height="0.00"/><rect x="82" y="110.00" width="20" height="0.00"/><rect x="106" y="110.00" width="20" height="0.00"/><rect x="130" y="110.00" width="20" height="0.00"/><rect x="154" y="110.00" width="20" height="0.00"/><rect x="178" y="110.00" width="20" height="0.00"/><rect x="202" y="110.00" width="20" height="0.00"/><rect x="226" y="110.00" width="20" height="0.00"/><rect x="250" y="110.00" width="20" height="0.00"/><rect x="274" y="110.00" width="20" height="0.00"/><rect x="298" y="110.00" width="20" height="0.00"/><rect x="322" y="110.00" width="20" height="0.00"/><rect x="346" y="110.00" width="20" height="0.00"/><rect x="370" y="100.00" width="20" height="10.00"/><text x="10" y="137">0.0137 ms</text><text x="300" y="137">0.0808 ms</text></svg></figure></div><h2>Case provenance and diagnostics</h2><details><summary>mlp_gemm_b1</summary><pre>{
+  &quot;seed&quot;: 2026,
+  &quot;model_sha256&quot;: &quot;344ce618fc0bc8b8e840c6f1afb730d44fb3104229f9444521958d93896980a0&quot;,
+  &quot;input_sha256&quot;: &quot;cb4e8b7644d5267e1a8080953e678652cb5e97a0288b00ce0de4d57d5408af6c&quot;,
+  &quot;export&quot;: {
+    &quot;exporter&quot;: &quot;dynamo&quot;,
+    &quot;fallback_reason&quot;: null,
+    &quot;graph_checked&quot;: true,
+    &quot;dynamic_batch&quot;: false
+  },
+  &quot;session_settings&quot;: {
+    &quot;provider&quot;: &quot;CPUExecutionProvider&quot;,
+    &quot;required&quot;: true,
+    &quot;intra_op_num_threads&quot;: 2,
+    &quot;inter_op_num_threads&quot;: 1,
+    &quot;execution_mode&quot;: &quot;sequential&quot;,
+    &quot;graph_optimization&quot;: &quot;all&quot;
+  },
+  &quot;accuracy&quot;: {
+    &quot;verdict&quot;: &quot;PASS&quot;,
+    &quot;atol&quot;: 0.0001,
+    &quot;rtol&quot;: 0.001,
+    &quot;reference&quot;: &quot;PyTorch CPU float32&quot;,
+    &quot;finite&quot;: true,
+    &quot;max_absolute_error&quot;: 1.7881393432617188e-07,
+    &quot;reason&quot;: null
+  },
+  &quot;error_category&quot;: null,
+  &quot;error&quot;: null,
+  &quot;sanitized_trace&quot;: null,
+  &quot;memory&quot;: {
+    &quot;rss_start_bytes&quot;: 392511488,
+    &quot;rss_end_bytes&quot;: 393760768,
+    &quot;rss_peak_sampled_bytes&quot;: null,
+    &quot;note&quot;: &quot;boundary snapshots only; no peak sampler in benchmark&quot;
+  }
+}</pre></details><details><summary>conv2d_b1</summary><pre>{
+  &quot;seed&quot;: 2026,
+  &quot;model_sha256&quot;: &quot;d65c6872b81bb73bb8c235903e050448ed9b609b0f0e1119b5fd82936e148fa2&quot;,
+  &quot;input_sha256&quot;: &quot;8ceafb85cdb022445173867f0ff2e32974f3f773c34f1d7057db792a2630fd6d&quot;,
+  &quot;export&quot;: {
+    &quot;exporter&quot;: &quot;dynamo&quot;,
+    &quot;fallback_reason&quot;: null,
+    &quot;graph_checked&quot;: true,
+    &quot;dynamic_batch&quot;: false
+  },
+  &quot;session_settings&quot;: {
+    &quot;provider&quot;: &quot;CPUExecutionProvider&quot;,
+    &quot;required&quot;: true,
+    &quot;intra_op_num_threads&quot;: 2,
+    &quot;inter_op_num_threads&quot;: 1,
+    &quot;execution_mode&quot;: &quot;sequential&quot;,
+    &quot;graph_optimization&quot;: &quot;all&quot;
+  },
+  &quot;accuracy&quot;: {
+    &quot;verdict&quot;: &quot;PASS&quot;,
+    &quot;atol&quot;: 0.0001,
+    &quot;rtol&quot;: 0.001,
+    &quot;reference&quot;: &quot;PyTorch CPU float32&quot;,
+    &quot;finite&quot;: true,
+    &quot;max_absolute_error&quot;: 4.470348358154297e-08,
+    &quot;reason&quot;: null
+  },
+  &quot;error_category&quot;: null,
+  &quot;error&quot;: null,
+  &quot;sanitized_trace&quot;: null,
+  &quot;memory&quot;: {
+    &quot;rss_start_bytes&quot;: 397185024,
+    &quot;rss_end_bytes&quot;: 397185024,
+    &quot;rss_peak_sampled_bytes&quot;: null,
+    &quot;note&quot;: &quot;boundary snapshots only; no peak sampler in benchmark&quot;
+  }
+}</pre></details><details><summary>attention_matmul_b1</summary><pre>{
+  &quot;seed&quot;: 2026,
+  &quot;model_sha256&quot;: &quot;a9ee63c71d38d5c7909ac8eb5c5cc25bbd94703b7122a9a48fbed59d646a9fc0&quot;,
+  &quot;input_sha256&quot;: &quot;ef8193c178c53a9977e2423fc9d47fec8fea0ab353b1f71a18b78920d21ca392&quot;,
+  &quot;export&quot;: {
+    &quot;exporter&quot;: &quot;dynamo&quot;,
+    &quot;fallback_reason&quot;: null,
+    &quot;graph_checked&quot;: true,
+    &quot;dynamic_batch&quot;: false
+  },
+  &quot;session_settings&quot;: {
+    &quot;provider&quot;: &quot;CPUExecutionProvider&quot;,
+    &quot;required&quot;: true,
+    &quot;intra_op_num_threads&quot;: 2,
+    &quot;inter_op_num_threads&quot;: 1,
+    &quot;execution_mode&quot;: &quot;sequential&quot;,
+    &quot;graph_optimization&quot;: &quot;all&quot;
+  },
+  &quot;accuracy&quot;: {
+    &quot;verdict&quot;: &quot;PASS&quot;,
+    &quot;atol&quot;: 0.0001,
+    &quot;rtol&quot;: 0.001,
+    &quot;reference&quot;: &quot;PyTorch CPU float32&quot;,
+    &quot;finite&quot;: true,
+    &quot;max_absolute_error&quot;: 8.940696716308594e-08,
+    &quot;reason&quot;: null
+  },
+  &quot;error_category&quot;: null,
+  &quot;error&quot;: null,
+  &quot;sanitized_trace&quot;: null,
+  &quot;memory&quot;: {
+    &quot;rss_start_bytes&quot;: 397238272,
+    &quot;rss_end_bytes&quot;: 397242368,
+    &quot;rss_peak_sampled_bytes&quot;: null,
+    &quot;note&quot;: &quot;boundary snapshots only; no peak sampler in benchmark&quot;
+  }
+}</pre></details><h2>Stability</h2><p>No concurrent stress measurements in this run.</p><h2>Fault injection</h2><div class="scroll"><table><caption>PASS means the injected failure was handled as expected</caption><thead><tr><th scope="col">Injection</th><th scope="col">Expected</th><th scope="col">Observed category</th><th scope="col">Outcome</th><th scope="col">Error</th><th scope="col">Cleanup</th></tr></thead><tbody><tr><td>bad_dtype</td><td>EXPECTED_REJECTION</td><td>EXPECTED_REJECTION</td><td>PASS</td><td>InvalidArgument: [ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Unexpected input data type. Actual: (tensor(double)) , expected: (tensor(float))</td><td>True</td></tr><tr><td>bad_shape</td><td>EXPECTED_REJECTION</td><td>EXPECTED_REJECTION</td><td>PASS</td><td>InvalidArgument: [ONNXRuntimeError] : 2 : INVALID_ARGUMENT : Invalid rank for input: input Got: 1 Expected: 2 Please fix either the inputs&lt;path&gt; or the model.</td><td>True</td></tr><tr><td>missing_file</td><td>EXPECTED_REJECTION</td><td>EXPECTED_REJECTION</td><td>PASS</td><td>NoSuchFile: [ONNXRuntimeError] : 3 : NO_SUCHFILE : Load model from &lt;path&gt; failed:Load model &lt;path&gt; failed. File doesn&#x27;t exist</td><td>True</td></tr><tr><td>corrupt_file</td><td>EXPECTED_REJECTION</td><td>EXPECTED_REJECTION</td><td>PASS</td><td>InvalidProtobuf: [ONNXRuntimeError] : 7 : INVALID_PROTOBUF : Load model from &lt;path&gt; failed:Protobuf parsing failed.</td><td>True</td></tr><tr><td>unavailable_provider</td><td>UNAVAILABLE</td><td>UNAVAILABLE</td><td>PASS</td><td>ProviderUnavailable: AIVS_Sentinel_UnavailableProvider UNAVAILABLE; installed providers: [&#x27;AzureExecutionProvider&#x27;, &#x27;CPUExecutionProvider&#x27;]</td><td>True</td></tr><tr><td>timeout</td><td>EXPECTED_TIMEOUT</td><td>EXPECTED_TIMEOUT</td><td>PASS</td><td>child deadline exceeded</td><td>True</td></tr></tbody></table></div>
+<h2>Methodology and limits</h2><p>Synthetic seeded models/inputs; synchronous session.run; perf_counter_ns; warmup excluded. Shared systems are noisy. No production task accuracy or physical board validation.</p>
+<p>Each inference uses the same prepared input. CPU frequency, thermal effects, graph caching and
+other activity can affect timings. Stress retains bounded first samples per worker; their
+percentiles may not represent the entire run. Sequential benchmarks include Python call overhead;
+stress throughput is concurrent. GPU selection alone does not prove accelerator node execution.
+Boundary RSS snapshots do not establish peak memory. Synthetic numerical agreement establishes
+runtime fidelity, not task accuracy. No physical development board testing was performed.</p>
+</main></body></html>
